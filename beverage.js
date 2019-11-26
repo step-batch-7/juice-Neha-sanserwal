@@ -1,18 +1,24 @@
-const transformArgsData = require("./utils/TransformArgsData")
-  .transformArgsData;
-const operationRef = require("./utils/constants").OPERATION;
-const valiadteArgs = require("./src/validateArgs").valiadteArgs;
-
+const performOperation = require("./src/performOperation").performOperation;
 const transactionOperation = process.argv.slice(2);
-let transformedArgs = transformArgsData(transactionOperation);
-
-if (valiadteArgs(transformedArgs)) {
-  let operations = Object.keys(transformedArgs);
-  let operation = operations[0];
-  let operationArgs = transformedArgs[operations[0]];
-  let beverage = operationArgs["--beverage"];
-  let empId = operationArgs["--empId"];
-  let quantity = operationArgs["--quantity"];
-
-  console.log(operationRef[operation](empId, beverage, quantity));
-}
+console.log(performOperation(transactionOperation));
+// const stringifyTransactions = function(stringifiedTransactions, transaction) {
+//   let stringifiedTransactions = {
+//     totalQuantity: +0,
+//     transactionsHistory: "",
+//     empId: [empId]
+//   };
+//   //stringifiedTransactions = transactionsHistory.reduce(
+//     //   stringifyTransactions,
+//     //   stringifiedTransactions
+//     // );
+//   stringifiedTransactions["transactionsHistory"] +=
+//     stringifiedTransactions["empId"] + "\t";
+//   stringifiedTransactions["transactionsHistory"] +=
+//     transaction["beverage"] + "\t";
+//   stringifiedTransactions["transactionsHistory"] +=
+//     transaction["quantity"] + "\t";
+//   stringifiedTransactions["transactionsHistory"] +=
+//     transaction["todayDate"] + "\t" + "\n";
+//   stringifiedTransactions["totalQuantity"] += transaction["quantity"];
+//   return stringifiedTransactions;
+// };

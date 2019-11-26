@@ -5,12 +5,61 @@ const transactions = require("../utils/HandleTransactionScript")
 const assert = require("assert");
 
 describe("addEmployeeTransaction", function() {
-  it("should append new empId with details to transactions", function() {
-    assert.strictEqual(addEmployeeTransaction(25327, "Orange", 1), "success");
-    assert.strictEqual(addEmployeeTransaction(257, "Orge", 1), "success");
+  it("should update empId with details to transactions id it exist", function() {
+    const getTransactions = function() {
+      return {
+        2: [
+          {
+            beverage: "a",
+            quantity: 2,
+            date: "23-11-2000"
+          }
+        ]
+      };
+    };
+    const getTodayDate = function() {
+      return "1-1-2000";
+    };
+    let expected = {
+      "2": [
+        {
+          beverage: "a",
+          date: "23-11-2000",
+          quantity: 2
+        },
+        {
+          beverage: "Orange",
+          date: "1-1-2000",
+          quantity: 1
+        }
+      ]
+    };
+    assert.deepStrictEqual(
+      addEmployeeTransaction(2, "Orange", 1, getTodayDate, getTransactions),
+      expected
+    );
   });
-  it("should update transaction history if empId already exists", function() {
-    assert.strictEqual(addEmployeeTransaction(257, "banana", 2), "success");
-    assert.strictEqual(addEmployeeTransaction(25327, "apple", 1), "success");
+  it("should update empId with details to transactions id it exist", function() {
+    const getTransactions = function() {
+      return {};
+    };
+
+    const getTodayDate = function() {
+      return "1-1-2000";
+    };
+
+    let expected = {
+      "2": [
+        {
+          beverage: "Orange",
+          date: "1-1-2000",
+          quantity: 1
+        }
+      ]
+    };
+    assert.deepStrictEqual(
+      addEmployeeTransaction(2, "Orange", 1, getTodayDate, getTransactions),
+      expected
+    );
   });
 });

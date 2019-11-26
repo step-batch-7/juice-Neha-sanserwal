@@ -2,7 +2,7 @@ const fs = require("fs");
 const createTransactionScript = function() {
   return fs.writeFileSync("./transactions.json", "{}", "utf8");
 };
-const getTransactionScript = function() {
+const getTransactions = function() {
   if (!fs.existsSync("./transactions.json")) {
     createTransactionScript();
   }
@@ -11,7 +11,7 @@ const getTransactionScript = function() {
   return transactions;
 };
 
-const updateTrasactionScript = function(transactions) {
+const updateTransactions = function(transactions) {
   if (!fs.existsSync("./transactions.json")) {
     createTransactionScript();
   }
@@ -28,6 +28,6 @@ const searchEmployeeTransactions = function(empId, transactions) {
   return transactionsHistory;
 };
 
-exports.getTransactionScript = getTransactionScript;
-exports.updateTrasactionScript = updateTrasactionScript;
+exports.getTransactions = getTransactions;
+exports.updateTransactions = updateTransactions;
 exports.searchEmployeeTransactions = searchEmployeeTransactions;

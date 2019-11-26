@@ -1,32 +1,30 @@
-const getTransactionScript = require("../utils/HandleTransactionScript")
-  .getTransactionScript;
-const updateTransactionScript = require("../utils/HandleTransactionScript")
-  .updateTrasactionScript;
-
-const addEmployeeTransaction = function(empId, beverage, quantity) {
-  const transactions = getTransactionScript();
-  const todayDate = new Date();
+const addEmployeeTransaction = function(
+  empId,
+  beverage,
+  quantity,
+  getTodayDate,
+  getTransactions
+) {
+  const transactions = getTransactions();
+  const date = getTodayDate();
   const transactionsDetails = formatTransactionDetails(
     beverage,
     quantity,
-    todayDate
+    date
   );
   if (transactions[empId]) {
     transactions[empId].push(transactionsDetails);
   } else {
     transactions[empId] = [transactionsDetails];
   }
-  updateTransactionScript(transactions);
-  if (updateTransactionScript) {
-    return "success";
-  }
+  return transactions;
 };
 
 const formatTransactionDetails = function(beverage, quantity, todayDate) {
   let formatedDetails = {
     beverage: beverage,
     quantity: quantity,
-    todayDate: todayDate
+    date: todayDate
   };
   return formatedDetails;
 };
