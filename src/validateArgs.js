@@ -11,7 +11,7 @@ const hasValidSaveArgs = function(transactionArgs, operation) {
 
 const hasValidQueryArgs = function(transactionArgs, operation) {
   let isOperationValid = operation === "--query";
-  let argValue = transactionArgs[key];
+  let argValue = transactionArgs["--empId"];
   return isOperationValid && ArgValidationRefs["--empId"](argValue);
 };
 

@@ -1,22 +1,19 @@
 const fs = require("fs");
-const createTransactionScript = function() {
-  return fs.writeFileSync("./transactions.json", "{}", "utf8");
-};
-const getTransactions = function() {
+const getTransactions = function(createFile, readFile) {
   if (!fs.existsSync("./transactions.json")) {
-    createTransactionScript();
+    createFile("./transactions.json", "{}", "utf8");
   }
-  let transactions = fs.readFileSync("./transactions.json", "utf8");
+  let transactions = readFile("./transactions.json", "utf8");
   transactions = JSON.parse(transactions);
   return transactions;
 };
 
-const updateTransactions = function(transactions) {
+const updateTransactions = function(transactions, createFile, writeFile) {
   if (!fs.existsSync("./transactions.json")) {
-    createTransactionScript();
+    createFile("./transactions.json", "{}", "utf8");
   }
   transactions = JSON.stringify(transactions);
-  fs.writeFileSync("./transactions.json", transactions, "utf8");
+  writeFile("./transactions.json", transactions, "utf8");
 };
 
 const searchEmployeeTransactions = function(empId, transactions) {

@@ -1,3 +1,6 @@
+const createFile = require("../utils/fileIO").createFile;
+
+const readFile = require("../utils/fileIO").readFile;
 const addEmployeeTransaction = function(
   empId,
   beverage,
@@ -5,7 +8,7 @@ const addEmployeeTransaction = function(
   getTodayDate,
   getTransactions
 ) {
-  const transactions = getTransactions();
+  const transactions = getTransactions(createFile, readFile);
   const date = getTodayDate();
   const transactionsDetails = formatTransactionDetails(
     beverage,

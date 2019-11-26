@@ -5,10 +5,12 @@ const valiadteArgs = require("./validateArgs").valiadteArgs;
 const getTransactions = require("../utils/HandleTransactionScript")
   .getTransactions;
 const updateTransactions = require("../utils/HandleTransactionScript")
-  .updateTrasactions;
+  .updateTransactions;
 const getTodayDate = require("../utils/common").getTodayDate;
 const searchEmployeeTransactions = require("../utils/HandleTransactionScript")
   .searchEmployeeTransactions;
+const createFile = require("../utils/fileIO").createFile;
+const writeFile = require("../utils/fileIO").writeFile;
 
 const performOperation = function(transactionOperation) {
   let transformedArgs = transformArgsData(transactionOperation);
@@ -20,13 +22,15 @@ const performOperation = function(transactionOperation) {
     let empId = operationArgs["--empId"];
     let quantity = operationArgs["--quantity"];
     if ("--save" === operation) {
-      return operationRef[operation](
+      updatedTransaction = operationRef[operation](
         empId,
         beverage,
         quantity,
         getTodayDate,
         getTransactions
       );
+      updateTransactions(updatedTransaction, createFile, writeFile);
+      return "Saved Successfully";
     }
 
     return operationRef[operation](
