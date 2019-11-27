@@ -4,7 +4,7 @@ const isString = function(string) {
 
 const isNum = function(num) {
   num = parseInt(num);
-  return Number.isInteger(num);
+  return num > 0 && Number.isInteger(num);
 };
 const getTodayDate = function() {
   return new Date().toJSON();

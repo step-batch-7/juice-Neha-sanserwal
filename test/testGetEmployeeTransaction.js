@@ -4,38 +4,25 @@ const getEmployeeTransaction = require("../src/getEmployeeTransaction")
 describe("getEmployeeTransaction", function() {
   it("should return details if empId is present", function() {
     const getTransactions = function() {
-      return {
-        12: ["a", "b", "c"],
-        1: ["a"]
-      };
+      return [{ a: 1, b: "c" }];
     };
-    const searchEmployeeTransaction = function(empId, transactions) {
-      assert.deepStrictEqual(empId, 12);
-      assert.deepStrictEqual(transactions, {
-        12: ["a", "b", "c"],
-        1: ["a"]
-      });
-      return ["a", "b", "c"];
+    const searchEmployeeTransaction = function(empId, transaction) {
+      assert.deepStrictEqual(empId, 1);
+      assert.deepStrictEqual(transaction, { a: 1, b: "c" });
+      return { a: 1, b: "c" };
     };
     assert.deepStrictEqual(
-      getEmployeeTransaction(12, getTransactions, searchEmployeeTransaction)[
-        ("a", "b", "c")
-      ]
+      getEmployeeTransaction(1, getTransactions, searchEmployeeTransaction),
+      [{ a: 1, b: "c" }]
     );
   });
   it("should not return details if empId is not present", function() {
     const getTransactions = function() {
-      return {
-        12: ["a", "b", "c"],
-        1: ["a"]
-      };
+      return [];
     };
     const searchEmployeeTransaction = function(empId, transactions) {
       assert.deepStrictEqual(empId, 2);
-      assert.deepStrictEqual(transactions, {
-        12: ["a", "b", "c"],
-        1: ["a"]
-      });
+      assert.deepStrictEqual(transactions, {});
       return [];
     };
     assert.deepStrictEqual(

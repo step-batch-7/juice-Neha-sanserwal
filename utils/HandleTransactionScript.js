@@ -16,13 +16,11 @@ const updateTransactions = function(transactions, createFile, writeFile) {
   writeFile("./transactions.json", transactions, "utf8");
 };
 
-const searchEmployeeTransactions = function(empId, transactions) {
-  let transactionsHistory = [];
-  if (!transactions[empId]) {
-    return transactionsHistory;
+const searchEmployeeTransactions = function(empId, transaction) {
+  if (transaction["empId"] === empId) {
+    return transaction;
   }
-  transactionsHistory = transactions[empId];
-  return transactionsHistory;
+  return {};
 };
 
 exports.getTransactions = getTransactions;

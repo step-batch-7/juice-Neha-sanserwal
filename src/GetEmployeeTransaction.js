@@ -7,7 +7,10 @@ const getEmployeeTransaction = function(
 ) {
   let transactions = getTransactions(createFile, readFile);
   if (transactions) {
-    transactionsHistory = searchEmployeeTransactions(empId, transactions);
+    let transactionsHistory = [];
+    for (transaction of transactions) {
+      transactionsHistory.push(searchEmployeeTransactions(empId, transaction));
+    }
     return transactionsHistory;
   }
 };

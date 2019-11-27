@@ -20,7 +20,7 @@ describe("addEmployeeTransaction", function() {
     let operationArgs = {
       "--empId": 2,
       "--beverage": "Orange",
-      "--quantity": 1
+      "--qty": 1
     };
     assert.deepStrictEqual(
       addEmployeeTransaction(operationArgs, getTodayDate, getTransactions),
@@ -40,7 +40,7 @@ describe("addEmployeeTransaction", function() {
     let operationArgs = {
       "--empId": 2,
       "--beverage": "a",
-      "--quantity": 1
+      "--qty": 1
     };
     assert.deepStrictEqual(
       addEmployeeTransaction(operationArgs, getTodayDate, getTransactions),

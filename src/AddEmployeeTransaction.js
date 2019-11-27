@@ -11,7 +11,7 @@ const addEmployeeTransaction = function(
   const transactionsDetails = formatTransactionDetails(
     operationArgs["--empId"],
     operationArgs["--beverage"],
-    operationArgs["--quantity"],
+    operationArgs["--qty"],
     date
   );
   transactions.push(transactionsDetails);

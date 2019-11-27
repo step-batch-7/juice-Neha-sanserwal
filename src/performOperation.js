@@ -13,6 +13,7 @@ const createFile = require("../utils/fileIO").createFile;
 const writeFile = require("../utils/fileIO").writeFile;
 const arrangeOutputFormat = require("./arrangeOutputFormat")
   .arrangeOutputFormat;
+const header = require("../utils/constants").HEADER;
 
 const performSaveOperation = function(operation, operationArgs) {
   let updatedTransactions = operationRef[operation](
@@ -21,7 +22,9 @@ const performSaveOperation = function(operation, operationArgs) {
     getTransactions
   );
   updateTransactions(updatedTransactions, createFile, writeFile);
+
   let entryAdded = updatedTransactions.slice(-1);
+  console.log(entryAdded, updatedTransactions);
   return arrangeOutputFormat(entryAdded).transactionsHistory;
 };
 
@@ -31,8 +34,7 @@ const performQueryOperation = function(operation, empId) {
     getTransactions,
     searchEmployeeTransactions
   );
-  return JSON.stringify(query);
-  // let queryResults = arrangeOutputFormat(empId, query);
+  let queryResults = arrangeOutputFormat(query);
   return (
     queryResults.transactionsHistory + "total: " + queryResults.totalQuantity
   );
@@ -48,7 +50,7 @@ const performOperation = function(transactionOperation) {
     if ("--save" === operation) {
       return performSaveOperation(operation, operationArgs, empId);
     }
-    return performQueryOperation(operation, empId);
+    return header.concat(performQueryOperation(operation, empId));
   }
   return "PLEASE ENTER VALID INPUT";
 };
