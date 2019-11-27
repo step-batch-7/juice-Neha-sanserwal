@@ -1,6 +1,6 @@
-const transformArgsData = require("../utils/TransformArgsData")
+const transformArgsData = require("../utils/transformArgsData")
   .transformArgsData;
-const assignOperationParameters = require("../utils/TransformArgsData")
+const assignOperationParameters = require("../utils/transformArgsData")
   .assignOperationParameters;
 const assert = require("assert");
 

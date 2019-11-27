@@ -1,6 +1,6 @@
 const addEmployeeTransaction = require("../src/addEmployeeTransaction")
   .addEmployeeTransaction;
-const transactions = require("../utils/HandleTransactionScript")
+const transactions = require("../utils/handleTransactionScript")
   .getTransactionScript;
 const assert = require("assert");
 
@@ -34,8 +34,13 @@ describe("addEmployeeTransaction", function() {
         }
       ]
     };
+    let operationArgs = {
+      "--empId": 2,
+      "--beverage": "Orange",
+      "--quantity": 1
+    };
     assert.deepStrictEqual(
-      addEmployeeTransaction(2, "Orange", 1, getTodayDate, getTransactions),
+      addEmployeeTransaction(operationArgs, getTodayDate, getTransactions),
       expected
     );
   });
@@ -57,8 +62,13 @@ describe("addEmployeeTransaction", function() {
         }
       ]
     };
+    let operationArgs = {
+      "--empId": 2,
+      "--beverage": "Orange",
+      "--quantity": 1
+    };
     assert.deepStrictEqual(
-      addEmployeeTransaction(2, "Orange", 1, getTodayDate, getTransactions),
+      addEmployeeTransaction(operationArgs, getTodayDate, getTransactions),
       expected
     );
   });

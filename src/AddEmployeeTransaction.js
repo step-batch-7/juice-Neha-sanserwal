@@ -2,19 +2,18 @@ const createFile = require("../utils/fileIO").createFile;
 
 const readFile = require("../utils/fileIO").readFile;
 const addEmployeeTransaction = function(
-  empId,
-  beverage,
-  quantity,
+  operationArgs,
   getTodayDate,
   getTransactions
 ) {
   const transactions = getTransactions(createFile, readFile);
-  const date = getTodayDate();
+  const date = getTodayDate().toJSON();
   const transactionsDetails = formatTransactionDetails(
-    beverage,
-    quantity,
+    operationArgs["--beverage"],
+    operationArgs["--quantity"],
     date
   );
+  let empId = operationArgs["--empId"];
   if (transactions[empId]) {
     transactions[empId].push(transactionsDetails);
   } else {

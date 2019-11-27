@@ -1,10 +1,6 @@
 const assert = require("assert");
-const getEmployeeTransaction = require("../src/GetEmployeeTransaction")
+const getEmployeeTransaction = require("../src/getEmployeeTransaction")
   .getEmployeeTransaction;
-
-const transactions = require("../utils/HandleTransactionScript")
-  .getTransactions;
-
 describe("getEmployeeTransaction", function() {
   it("should return details if empId is present", function() {
     const getTransactions = function() {

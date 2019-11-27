@@ -1,8 +1,8 @@
-const getTransaction = require("../utils/HandleTransactionScript")
+const getTransaction = require("../utils/handleTransactionScript")
   .getTransactions;
-const updateTransactions = require("../utils/HandleTransactionScript")
+const updateTransactions = require("../utils/handleTransactionScript")
   .updateTransactions;
-const searchEmployeeTransactions = require("../utils/HandleTransactionScript")
+const searchEmployeeTransactions = require("../utils/handleTransactionScript")
   .searchEmployeeTransactions;
 const assert = require("assert");
 
