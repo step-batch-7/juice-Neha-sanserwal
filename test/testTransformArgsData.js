@@ -6,15 +6,11 @@ const assert = require("assert");
 
 describe("tranformArgsData", function() {
   it("should transform an array to object of object with first value to be main key", function() {
-    let expected = {
-      a: { "--beverage": "a", "--empId": "", "--quantity": "" }
-    };
+    let expected = { a: { "--beverage": "a" } };
     let actual = transformArgsData(["a", "--beverage", "a"]);
     assert.deepStrictEqual(actual, expected);
 
-    expected = {
-      a: { "--beverage": "a", "--empId": "c", "--quantity": "" }
-    };
+    expected = { a: { "--beverage": "a", "--empId": "c" } };
     actual = transformArgsData(["a", "--beverage", "a", "--empId", "c"]);
     assert.deepStrictEqual(actual, expected);
   });
@@ -24,22 +20,18 @@ describe("tranformArgsData", function() {
   });
 
   it("should return object for array of odd length", function() {
-    let expected = {
-      a: { "--beverage": "as", "--empId": "", "--quantity": "" }
-    };
+    let expected = { a: { "--beverage": "as" } };
     let actual = transformArgsData(["a", "--beverage", "as"]);
     assert.deepStrictEqual(actual, expected);
   });
   it("should return object for array of even length", function() {
-    let expected = {
-      a: { "--beverage": "", "--empId": "", "--quantity": "" }
-    };
+    let expected = { a: {} };
     let actual = transformArgsData(["a", "--beverage"]);
     assert.deepStrictEqual(actual, expected);
   });
 });
 
-describe("pairOperationParameters", function() {
+describe("assignOperationParameters", function() {
   let operationArgs = {
     "--beverage": "",
     "--empId": "",

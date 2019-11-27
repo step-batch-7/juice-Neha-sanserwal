@@ -9,21 +9,23 @@ const addEmployeeTransaction = function(
   const transactions = getTransactions(createFile, readFile);
   const date = getTodayDate();
   const transactionsDetails = formatTransactionDetails(
+    operationArgs["--empId"],
     operationArgs["--beverage"],
     operationArgs["--quantity"],
     date
   );
-  let empId = operationArgs["--empId"];
-  if (transactions[empId]) {
-    transactions[empId].push(transactionsDetails);
-  } else {
-    transactions[empId] = [transactionsDetails];
-  }
+  transactions.push(transactionsDetails);
   return transactions;
 };
 
-const formatTransactionDetails = function(beverage, quantity, todayDate) {
+const formatTransactionDetails = function(
+  empId,
+  beverage,
+  quantity,
+  todayDate
+) {
   let formatedDetails = {
+    empId: empId,
     beverage: beverage,
     quantity: quantity,
     date: todayDate

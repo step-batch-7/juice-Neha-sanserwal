@@ -1,5 +1,5 @@
 const stringifyTransactions = function(formatedString, transactions) {
-  formatedString["transactionsHistory"] += formatedString["empId"] + ",";
+  formatedString["transactionsHistory"] += transactions["empId"] + ",";
   formatedString["transactionsHistory"] += transactions["beverage"] + ",";
   formatedString["transactionsHistory"] += transactions["quantity"] + ",";
   formatedString["transactionsHistory"] += transactions["date"] + "\n";
@@ -7,11 +7,10 @@ const stringifyTransactions = function(formatedString, transactions) {
   return formatedString;
 };
 
-const arrangeOutputFormat = function(empId, entry) {
+const arrangeOutputFormat = function(entry) {
   let formatedString = {
     totalQuantity: +0,
-    transactionsHistory: "",
-    empId: empId
+    transactionsHistory: ""
   };
   formatedString = entry.reduce(stringifyTransactions, formatedString);
   return formatedString;

@@ -14,15 +14,15 @@ const writeFile = require("../utils/fileIO").writeFile;
 const arrangeOutputFormat = require("./arrangeOutputFormat")
   .arrangeOutputFormat;
 
-const performSaveOperation = function(operation, operationArgs, empId) {
-  updatedTransaction = operationRef[operation](
+const performSaveOperation = function(operation, operationArgs) {
+  let updatedTransactions = operationRef[operation](
     operationArgs,
     getTodayDate,
     getTransactions
   );
-  updateTransactions(updatedTransaction, createFile, writeFile);
-  let entryAdded = updatedTransaction[empId].slice(-1);
-  return arrangeOutputFormat(empId, entryAdded).transactionsHistory;
+  updateTransactions(updatedTransactions, createFile, writeFile);
+  let entryAdded = updatedTransactions.slice(-1);
+  return arrangeOutputFormat(entryAdded).transactionsHistory;
 };
 
 const performQueryOperation = function(operation, empId) {
@@ -31,7 +31,8 @@ const performQueryOperation = function(operation, empId) {
     getTransactions,
     searchEmployeeTransactions
   );
-  let queryResults = arrangeOutputFormat(empId, query);
+  return JSON.stringify(query);
+  // let queryResults = arrangeOutputFormat(empId, query);
   return (
     queryResults.transactionsHistory + "total: " + queryResults.totalQuantity
   );
@@ -49,6 +50,7 @@ const performOperation = function(transactionOperation) {
     }
     return performQueryOperation(operation, empId);
   }
+  return "PLEASE ENTER VALID INPUT";
 };
 
 exports.performOperation = performOperation;

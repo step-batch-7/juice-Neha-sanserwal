@@ -7,33 +7,16 @@ const assert = require("assert");
 describe("addEmployeeTransaction", function() {
   it("should update empId with details to transactions id it exist", function() {
     const getTransactions = function() {
-      return {
-        2: [
-          {
-            beverage: "a",
-            quantity: 2,
-            date: "23-11-2000"
-          }
-        ]
-      };
+      return [{ empId: 2, beverage: "a", quantity: 2, date: "23-11-2000" }];
     };
     const getTodayDate = function() {
       return "1-1-2000";
     };
-    let expected = {
-      "2": [
-        {
-          beverage: "a",
-          date: "23-11-2000",
-          quantity: 2
-        },
-        {
-          beverage: "Orange",
-          date: "1-1-2000",
-          quantity: 1
-        }
-      ]
-    };
+
+    let expected = [
+      { empId: 2, beverage: "a", quantity: 2, date: "23-11-2000" },
+      { empId: 2, beverage: "Orange", quantity: 1, date: "1-1-2000" }
+    ];
     let operationArgs = {
       "--empId": 2,
       "--beverage": "Orange",
@@ -46,25 +29,17 @@ describe("addEmployeeTransaction", function() {
   });
   it("should update empId with details to transactions id it exist", function() {
     const getTransactions = function() {
-      return {};
+      return [];
     };
 
     const getTodayDate = function() {
       return "1-1-2000";
     };
 
-    let expected = {
-      "2": [
-        {
-          beverage: "Orange",
-          date: "1-1-2000",
-          quantity: 1
-        }
-      ]
-    };
+    let expected = [{ empId: 2, beverage: "a", quantity: 1, date: "1-1-2000" }];
     let operationArgs = {
       "--empId": 2,
-      "--beverage": "Orange",
+      "--beverage": "a",
       "--quantity": 1
     };
     assert.deepStrictEqual(

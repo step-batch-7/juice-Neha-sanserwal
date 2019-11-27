@@ -1,28 +1,24 @@
-const assignOperationParameters = function(operationParams, OperationArgs) {
+const assignOperationParameters = function(operationParams, operationArgs) {
   for (let index = 0; index < operationParams.length; index += 2) {
     if (operationParams[index + 1]) {
       let key = operationParams[index];
       let value = operationParams[index + 1];
-      OperationArgs[key] = value;
+      operationArgs[key] = value;
     }
   }
 
-  return OperationArgs;
+  return operationArgs;
 };
 
 const transformArgsData = function(transactionOperation) {
   let formatedOperations = {};
-  let OperationArgs = {
-    "--beverage": "",
-    "--empId": "",
-    "--quantity": ""
-  };
+  let operationArgs = {};
   let operation = transactionOperation[0];
   if (operation) {
     formatedOperations[operation] = transactionOperation.slice(1);
     formatedOperations[operation] = assignOperationParameters(
       formatedOperations[operation],
-      OperationArgs
+      operationArgs
     );
   }
   return formatedOperations;

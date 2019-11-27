@@ -6,7 +6,6 @@ const getEmployeeTransaction = function(
   searchEmployeeTransactions
 ) {
   let transactions = getTransactions(createFile, readFile);
-
   if (transactions) {
     transactionsHistory = searchEmployeeTransactions(empId, transactions);
     return transactionsHistory;
