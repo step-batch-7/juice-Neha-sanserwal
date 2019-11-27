@@ -7,7 +7,7 @@ const isNum = function(num) {
   return Number.isInteger(num);
 };
 const getTodayDate = function() {
-  return new Date();
+  return new Date().toJSON();
 };
 exports.isString = isString;
 exports.isNum = isNum;

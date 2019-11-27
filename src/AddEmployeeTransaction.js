@@ -7,7 +7,7 @@ const addEmployeeTransaction = function(
   getTransactions
 ) {
   const transactions = getTransactions(createFile, readFile);
-  const date = getTodayDate().toJSON();
+  const date = getTodayDate();
   const transactionsDetails = formatTransactionDetails(
     operationArgs["--beverage"],
     operationArgs["--quantity"],
