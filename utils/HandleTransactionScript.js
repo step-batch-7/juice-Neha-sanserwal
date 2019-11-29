@@ -16,13 +16,5 @@ const updateTransactions = function(transactions, createFile, writeFile) {
   writeFile("./transactions.json", transactions, "utf8");
 };
 
-const searchEmployeeTransactions = function(empId, transaction) {
-  if (transaction["empId"] === empId) {
-    return transaction;
-  }
-  return {};
-};
-
 exports.getTransactions = getTransactions;
 exports.updateTransactions = updateTransactions;
-exports.searchEmployeeTransactions = searchEmployeeTransactions;

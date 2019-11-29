@@ -1,6 +1,9 @@
 const assert = require("assert");
-const getEmployeeTransaction = require("../src/getEmployeeTransaction")
-  .getEmployeeTransaction;
+const {
+  getEmployeeTransaction,
+  matchingTransaction
+} = require("../src/getEmployeeTransaction");
+
 describe("getEmployeeTransaction", function() {
   it("should return details if empId is present", function() {
     const getTransactions = function() {
@@ -29,5 +32,15 @@ describe("getEmployeeTransaction", function() {
       getEmployeeTransaction(2, getTransactions, searchEmployeeTransaction),
       []
     );
+  });
+});
+
+describe("matchingTransaction", function() {
+  it("should validate if superset includes every value of given object", function() {
+    transaction = { empId: 1, b: "c" };
+    assert.ok(matchingTransaction({ a: 1 }, { a: 1, b: 2 }));
+  });
+  it("should validate if superset includes every value of given object", function() {
+    assert.ok(!matchingTransaction({ a: 1 }, { b: 2 }));
   });
 });

@@ -43,16 +43,3 @@ describe("updateTransactions", function() {
     );
   });
 });
-describe("searchEmployeeTransactions", function() {
-  it("should return the transaction if empId is present", function() {
-    transaction = { empId: 1, b: "c" };
-    assert.deepStrictEqual(searchEmployeeTransactions(1, transaction), {
-      empId: 1,
-      b: "c"
-    });
-  });
-  it("should return the empty object if empId is present", function() {
-    transaction = { empId: 1, b: "c" };
-    assert.deepStrictEqual(searchEmployeeTransactions(2, transaction), {});
-  });
-});

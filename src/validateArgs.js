@@ -1,40 +1,41 @@
-const argValidationRefs = require("../utils/constants").ARGS_VALIDATION_REF;
-const argKeys = require("../utils/constants").OPERATION_ARGS_KEYS;
-const isArgKeyValid = function(key) {
-  return argKeys.includes(key);
-};
-const isArgValueValid = function(key, argValue) {
-  if (argValidationRefs[key]) {
-    return argValidationRefs[key](argValue);
-  }
-  return false;
-};
-const isArgValid = function(key, argValue) {
-  return isArgKeyValid(key) && isArgValueValid(key, argValue);
-};
-const hasValidSaveArgs = function(transactionArgs, operation) {
-  let isOperationValid = operation === "--save";
-  for (key in transactionArgs) {
-    let argValue = transactionArgs[key];
-    isOperationValid = isOperationValid && isArgValid(key, argValue);
-  }
-  return isOperationValid;
-};
-
-const hasValidQueryArgs = function(transactionArgs, operation) {
-  let isOperationValid = operation === "--query";
-  let argValue = transactionArgs["--empId"];
-  return isOperationValid && isArgValid("--empId", argValue);
-};
-
-const valiadteArgs = function(transformedArgs) {
-  let operation = Object.keys(transformedArgs)[0];
+const isValidKeyValue = function(key, operationArgs, saveArgsValidationRef) {
   return (
-    hasValidSaveArgs(transformedArgs[operation], operation) ||
-    hasValidQueryArgs(transformedArgs[operation], operation)
+    saveArgsValidationRef[key] && saveArgsValidationRef[key](operationArgs[key])
+  );
+};
+const validateArgs = function(operationArgs, argsValidationRef, validArgLen) {
+  let isValidArg = validArgLen;
+  for (key in operationArgs) {
+    isValidArg =
+      isValidArg && isValidKeyValue(key, operationArgs, argsValidationRef);
+  }
+  return isValidArg;
+};
+const validateSaveOperation = function(operationArgs, argsValidationRef) {
+  let keys = Object.keys(operationArgs);
+  let isValidArgsLen = keys.length === 3;
+  return validateArgs(operationArgs, argsValidationRef, isValidArgsLen);
+};
+
+const validateQueryOperation = function(operationArgs, argsValidationRef) {
+  let keys = Object.keys(operationArgs);
+  let isValidArgsLen = keys.length > 0;
+  return validateArgs(operationArgs, argsValidationRef, isValidArgsLen);
+};
+const operationValidaionRefs = {
+  "--save": validateSaveOperation,
+  "--query": validateQueryOperation
+};
+
+const validateOperation = function(transformedArgs, argsValidationRef) {
+  let operation = Object.keys(transformedArgs)[0];
+  let isValidOperation = operation;
+  let operationArgs = transformedArgs[operation];
+  argsValidationRef = argsValidationRef[operation];
+  return (
+    isValidOperation &&
+    operationValidaionRefs[operation](operationArgs, argsValidationRef)
   );
 };
 
-exports.valiadteArgs = valiadteArgs;
-exports.hasValidQueryArgs = hasValidQueryArgs;
-exports.hasValidSaveArgs = hasValidSaveArgs;
+exports.validateOperation = validateOperation;
