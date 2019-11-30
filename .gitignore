@@ -2,5 +2,5 @@ node_modules/
 .nyc_output
 transactions.json
 coverage
-appTest/*
+failures.txt
 
