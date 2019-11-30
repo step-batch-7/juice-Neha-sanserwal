@@ -6,9 +6,17 @@ const isNum = function(num) {
   num = parseInt(num);
   return num > 0 && Number.isInteger(num);
 };
-const getTodayDate = function() {
-  return new Date().toJSON();
+const isValidDate = function(date) {
+  const dateRegx = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+  return dateRegx.test(date);
 };
-exports.isString = isString;
-exports.isNum = isNum;
-exports.getTodayDate = getTodayDate;
+
+const getTodayDate = function() {
+  return process.env.stubbedDate || new Date().toJSON();
+};
+module.exports = {
+  isString: isString,
+  isNum: isNum,
+  getTodayDate: getTodayDate,
+  isValidDate: isValidDate
+};
