@@ -1,3 +1,0 @@
-(export stubbedDate="2019-11-30T04:32:11.812Z";node beverage.js --save --beverage "Orage" --empId 1 --qty 1)
-Employee ID, Beverage, Quantity, Date
-1,Orage,1,2019-11-30T04:32:11.812Z

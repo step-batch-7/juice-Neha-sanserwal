@@ -1,0 +1,5 @@
+(export juicePath="./appTest/presetForQueryOperation.json";node beverage.js --query --date "2019-12-02")
+Employee ID, Beverage, Quantity, Date
+1,Orange,2,2019-12-02T11:40:06.947Z
+12,Banana,2,2019-12-02T11:40:24.004Z
+Total: 4 Juices

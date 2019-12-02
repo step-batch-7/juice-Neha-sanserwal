@@ -1,0 +1,20 @@
+[
+	{
+		"empId": "1",
+		"beverage": "Orange",
+		"quantity": "1",
+		"date": "2019-11-02T11:39:12.263Z"
+	},
+	{
+		"empId": "1",
+		"beverage": "Orange",
+		"quantity": "2",
+		"date": "2019-12-02T11:40:06.947Z"
+	},
+	{
+		"empId": "12",
+		"beverage": "Banana",
+		"quantity": "2",
+		"date": "2019-12-02T11:40:24.004Z"
+	}
+]

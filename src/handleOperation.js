@@ -5,7 +5,7 @@ const {
 	getTransactions,
 	updateTransactions
 } = require("../utils/handleTransactionScript");
-const { getTodayDate } = require("../utils/common");
+const { getTodayDate } = require("./config");
 const { createFile, writeFile } = require("../utils/fileIO");
 const { arrangeOutputFormat } = require("./arrangeOutputFormat");
 const { HEADER } = require("../utils/constants");
