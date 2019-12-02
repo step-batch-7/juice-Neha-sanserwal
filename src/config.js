@@ -5,8 +5,11 @@ const pathFinder = function(env) {
 	);
 };
 
-exports.path = pathFinder(process.env);
+const getTodayDate = function(env) {
+	return env.stubbedDate || new Date().toJSON();
+};
 
-exports.getTodayDate = function() {
-	return process.env.stubbedDate || new Date().toJSON();
+module.exports = {
+	pathFinder: pathFinder,
+	getTodayDate: getTodayDate
 };

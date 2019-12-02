@@ -22,9 +22,13 @@ describe("getTransactions", function() {
 		assert.strictEqual(encoding, "utf8");
 		return "[]";
 	};
-	it("should get all the data form give json file", function() {
+	it("should get all the data from given json file", function() {
 		assert.deepStrictEqual(
-			getTransaction(createFileIfNotPresent, readFile),
+			getTransaction(
+				createFileIfNotPresent,
+				readFile,
+				"./transactions.json"
+			),
 			[]
 		);
 	});
@@ -45,7 +49,12 @@ describe("updateTransactions", function() {
 	};
 	it("should update the file with the values provided", function() {
 		assert.strictEqual(
-			updateTransactions({ a: "a" }, createFile, writeFile),
+			updateTransactions(
+				{ a: "a" },
+				createFile,
+				writeFile,
+				"./transactions.json"
+			),
 			undefined
 		);
 	});

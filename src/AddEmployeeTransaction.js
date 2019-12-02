@@ -2,11 +2,11 @@ const { createFile, readFile } = require("../utils/fileIO");
 
 const addEmployeeTransaction = function(
 	operationArgs,
-	getTodayDate,
-	getTransactions
+	date,
+	getTransactions,
+	path
 ) {
-	const transactions = getTransactions(createFile, readFile);
-	const date = getTodayDate();
+	const transactions = getTransactions(createFile, readFile, path);
 	const transactionsDetails = formatTransactionDetails(
 		operationArgs["empId"],
 		operationArgs["beverage"],
