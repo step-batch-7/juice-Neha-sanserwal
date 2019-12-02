@@ -1,5 +1,4 @@
-const createFile = require("../utils/fileIO").createFile;
-const readFile = require("../utils/fileIO").readFile;
+const { createFile, readFile } = require("../utils/fileIO");
 
 const changeDateFormat = date => {
 	return date.slice(0, 10);
@@ -23,11 +22,10 @@ const matchingTransaction = (queryArgs, transaction) => {
 const getEmployeeTransaction = (queryArgs, getTransactions) => {
 	let transactions = getTransactions(createFile, readFile);
 	let transactionsHistory = [];
-	for (transaction of transactions) {
-		if (matchingTransaction(queryArgs, transaction)) {
-			transactionsHistory.push(transaction);
-		}
-	}
+	transactions.forEach(transaction => {
+		let isTransactionMatched = matchingTransaction(queryArgs, transaction);
+		isTransactionMatched && transactionsHistory.push(transaction);
+	});
 	return transactionsHistory;
 };
 

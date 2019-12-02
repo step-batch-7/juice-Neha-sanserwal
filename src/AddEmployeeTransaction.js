@@ -1,6 +1,5 @@
-const createFile = require("../utils/fileIO").createFile;
+const { createFile, readFile } = require("../utils/fileIO");
 
-const readFile = require("../utils/fileIO").readFile;
 const addEmployeeTransaction = function(
 	operationArgs,
 	getTodayDate,
