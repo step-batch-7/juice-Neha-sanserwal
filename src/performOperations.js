@@ -23,7 +23,7 @@ const performQueryOperation = function(operationArgs, envVars, fsModules) {
 	let transactions = arrangeOutputFormat(queryResult).transactionsHistory;
 	let totalJuices = arrangeOutputFormat(queryResult).totalQuantity;
 	let totalJuicesPostfix = (totalJuices == 1 && "Juice") || "Juices";
-	let footer = `Total : ${totalJuices} ${totalJuicesPostfix} `;
+	let footer = `Total: ${totalJuices} ${totalJuicesPostfix}`;
 	transactions.push(footer);
 	return transactions.join("\n");
 };
