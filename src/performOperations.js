@@ -21,11 +21,10 @@ const performSaveOperation = function(operationArgs, envVars, fsModules) {
 const performQueryOperation = function(operationArgs, envVars, fsModules) {
 	let queryResult = query(operationArgs, getTransactions, envVars, fsModules);
 	let transactions = arrangeOutputFormat(queryResult).transactionsHistory;
-	let totalJuices = `Total: ${
-		arrangeOutputFormat(queryResult).totalQuantity
-	}`;
-	totalJuices = `${totalJuices} Juices`;
-	transactions.push(totalJuices);
+	let totalJuices = arrangeOutputFormat(queryResult).totalQuantity;
+	let totalJuicesPostfix = (totalJuices == 1 && "Juice") || "Juices";
+	let footer = `Total : ${totalJuices} ${totalJuicesPostfix} `;
+	transactions.push(footer);
 	return transactions.join("\n");
 };
 
