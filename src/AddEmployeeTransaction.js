@@ -1,17 +1,15 @@
-const { createFile, readFile } = require("../utils/fileIO");
-
 const addEmployeeTransaction = function(
 	operationArgs,
-	date,
 	getTransactions,
-	path
+	envVars,
+	fsModules
 ) {
-	const transactions = getTransactions(createFile, readFile, path);
+	const transactions = getTransactions(fsModules, envVars);
 	const transactionsDetails = formatTransactionDetails(
 		operationArgs["empId"],
 		operationArgs["beverage"],
 		operationArgs["qty"],
-		date
+		envVars.date
 	);
 	transactions.push(transactionsDetails);
 	return transactions;

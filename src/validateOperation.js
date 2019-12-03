@@ -1,3 +1,5 @@
+const { OPERATION_ARGS_VALIDATION_REF } = require("../utils/constants");
+
 const isValidKeyValue = function(key, operationArgs, argsValidationRef) {
 	return argsValidationRef[key] && argsValidationRef[key](operationArgs[key]);
 };
@@ -26,11 +28,11 @@ const operationValidaionRefs = {
 	"--query": validateQueryOperation
 };
 
-const validateOperation = function(transformedArgs, argsValidationRef) {
+const validateOperation = function(transformedArgs) {
 	let operation = Object.keys(transformedArgs)[0];
 	let isValidOperation = operation;
 	let operationArgs = transformedArgs[operation];
-	argsValidationRef = argsValidationRef[operation];
+	let argsValidationRef = OPERATION_ARGS_VALIDATION_REF[operation];
 	return (
 		isValidOperation &&
 		operationValidaionRefs[operation](operationArgs, argsValidationRef)

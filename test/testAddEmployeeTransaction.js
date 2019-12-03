@@ -11,11 +11,15 @@ describe("addEmployeeTransaction", function() {
 				{ empId: 2, beverage: "a", quantity: 2, date: "23-11-2000" }
 			];
 		};
-		const date = "1-1-2000";
-		const path = "sample.json";
+		const fsModules = {};
+		const envVars = {
+			path: "./transactions.json",
+			date: "2001-01-22",
+			encoding: "utf8"
+		};
 		let expected = [
 			{ empId: 2, beverage: "a", quantity: 2, date: "23-11-2000" },
-			{ empId: 2, beverage: "Orange", quantity: 1, date: "1-1-2000" }
+			{ empId: 2, beverage: "Orange", quantity: 1, date: "2001-01-22" }
 		];
 		let operationArgs = {
 			empId: 2,
@@ -23,19 +27,27 @@ describe("addEmployeeTransaction", function() {
 			qty: 1
 		};
 		assert.deepStrictEqual(
-			addEmployeeTransaction(operationArgs, date, getTransactions, path),
+			addEmployeeTransaction(
+				operationArgs,
+				getTransactions,
+				envVars,
+				fsModules
+			),
 			expected
 		);
 	});
 	it("should update empId with details to transactions id it exist", function() {
-		const getTransactions = function(createFile, readFile) {
+		const getTransactions = function(fsModules) {
 			return [];
 		};
-
-		const date = "1-1-2000";
-		const path = "sample.json";
+		const fsModules = {};
+		const envVars = {
+			path: "./transactions.json",
+			date: "2001-01-22",
+			encoding: "utf8"
+		};
 		let expected = [
-			{ empId: 2, beverage: "a", quantity: 1, date: "1-1-2000" }
+			{ empId: 2, beverage: "a", quantity: 1, date: "2001-01-22" }
 		];
 		let operationArgs = {
 			empId: 2,
@@ -43,7 +55,12 @@ describe("addEmployeeTransaction", function() {
 			qty: 1
 		};
 		assert.deepStrictEqual(
-			addEmployeeTransaction(operationArgs, date, getTransactions, path),
+			addEmployeeTransaction(
+				operationArgs,
+				getTransactions,
+				envVars,
+				fsModules
+			),
 			expected
 		);
 	});

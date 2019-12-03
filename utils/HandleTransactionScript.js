@@ -1,20 +1,16 @@
-const fs = require("fs");
-
-const createFileIfNotPresent = (path, createFile) => {
-	!fs.existsSync(path) && createFile(path, "[]", "utf8");
-};
-
-const getTransactions = function(createFile, readFile, path) {
-	createFileIfNotPresent(path, createFile);
-	let transactions = readFile(path, "utf8");
+const getTransactions = function(fsModules, envVars) {
+	!fsModules.doesFileExist(envVars.path) &&
+		fsModules.createFile(envVars.path, "[]", envVars.encoding);
+	let transactions = fsModules.readFile(envVars.path, envVars.encoding);
 	transactions = JSON.parse(transactions);
 	return transactions;
 };
 
-const updateTransactions = function(transactions, createFile, writeFile, path) {
-	createFileIfNotPresent(path, createFile);
+const updateTransactions = function(transactions, fsModules, envVars) {
+	!fsModules.doesFileExist(envVars.path) &&
+		fsModules.createFile(envVars.path, "[]", envVars.encoding);
 	transactions = JSON.stringify(transactions);
-	writeFile(path, transactions, "utf8");
+	fsModules.writeFile(envVars.path, transactions, envVars.encoding);
 };
 
 exports.getTransactions = getTransactions;

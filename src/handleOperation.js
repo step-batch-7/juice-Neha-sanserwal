@@ -5,29 +5,38 @@ const {
 	getTransactions,
 	updateTransactions
 } = require("../utils/handleTransactionScript");
-const { getTodayDate } = require("./config");
-const { createFile, writeFile } = require("../utils/fileIO");
 const { arrangeOutputFormat } = require("./arrangeOutputFormat");
 const { HEADER } = require("../utils/constants");
 const { OPERATION_ARGS_VALIDATION_REF } = require("../utils/constants");
 
-const performSaveOperation = function(operation, operationArgs, path, date) {
+const performSaveOperation = function(
+	operation,
+	operationArgs,
+	envVars,
+	fsModules
+) {
 	let updatedTransactions = OPERATIONS[operation](
 		operationArgs,
-		date,
 		getTransactions,
-		path
+		envVars,
+		fsModules
 	);
-	updateTransactions(updatedTransactions, createFile, writeFile, path);
+	updateTransactions(updatedTransactions, fsModules, envVars);
 	let entryAdded = updatedTransactions.slice(-1);
 	return arrangeOutputFormat(entryAdded).transactionsHistory;
 };
 
-const performQueryOperation = function(operation, operationArgs, path) {
+const performQueryOperation = function(
+	operation,
+	operationArgs,
+	envVars,
+	fsModules
+) {
 	let queryResult = OPERATIONS[operation](
 		operationArgs,
 		getTransactions,
-		path
+		envVars,
+		fsModules
 	);
 	let transactions = arrangeOutputFormat(queryResult).transactionsHistory;
 	let totalJuices = `Total: ${
@@ -38,21 +47,31 @@ const performQueryOperation = function(operation, operationArgs, path) {
 	return transactions.join("\n");
 };
 
-const performOperation = function(operation, operationArgs, path, date) {
+const performOperation = function(
+	operation,
+	operationArgs,
+	envVars,
+	fsModules
+) {
 	if ("--save" === operation) {
 		let endResult = performSaveOperation(
 			operation,
 			operationArgs,
-			path,
-			date
+			envVars,
+			fsModules
 		);
 		return HEADER.concat(endResult);
 	}
-	let endResult = performQueryOperation(operation, operationArgs, path);
+	let endResult = performQueryOperation(
+		operation,
+		operationArgs,
+		envVars,
+		fsModules
+	);
 	return HEADER.concat(endResult);
 };
 
-const handleOperation = function(transactionOperation, path, date) {
+const handleOperation = function(transactionOperation, envVars, fsModules) {
 	let transformedArgs = transformArgsData(transactionOperation);
 	let validOperation = validateOperation(
 		transformedArgs,
@@ -62,7 +81,7 @@ const handleOperation = function(transactionOperation, path, date) {
 		let operations = Object.keys(transformedArgs);
 		let operation = operations[0];
 		let operationArgs = transformedArgs[operations[0]];
-		return performOperation(operation, operationArgs, path, date);
+		return performOperation(operation, operationArgs, envVars, fsModules);
 	}
 	return "PLEASE ENTER VALID INPUT";
 };

@@ -1,9 +1,12 @@
-const { pathFinder, getTodayDate } = require("./src/config");
-const handleOperation = require("./src/handleOperation").handleOperation;
-
+const { pathFinder, getTodayDate, getEncoding } = require("./src/config");
+const { handleOperation } = require("./src/handleOperation");
+const { fsModules } = require("./utils/fileIO");
 const transactionOperation = process.argv.slice(2);
-const path = pathFinder(process.env);
-const todayDate = getTodayDate(process.env);
+const envVars = {
+	path: pathFinder(process.env),
+	date: getTodayDate(process.env),
+	encoding: getEncoding
+};
 
-let operationOutput = handleOperation(transactionOperation, path, todayDate);
+let operationOutput = handleOperation(transactionOperation, envVars, fsModules);
 console.log(operationOutput);

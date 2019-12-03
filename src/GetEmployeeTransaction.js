@@ -19,8 +19,13 @@ const matchingTransaction = (queryArgs, transaction) => {
 	return isPresent;
 };
 
-const getEmployeeTransaction = (queryArgs, getTransactions, path) => {
-	let transactions = getTransactions(createFile, readFile, path);
+const getEmployeeTransaction = (
+	queryArgs,
+	getTransactions,
+	envVars,
+	fsModules
+) => {
+	let transactions = getTransactions(fsModules, envVars);
 	let transactionsHistory = [];
 	transactions.forEach(transaction => {
 		let isTransactionMatched = matchingTransaction(queryArgs, transaction);

@@ -1,8 +1,8 @@
 const fs = require("fs");
-const createFile = fs.writeFileSync;
-const readFile = fs.readFileSync;
-const writeFile = fs.writeFileSync;
-
-exports.createFile = createFile;
-exports.readFile = readFile;
-exports.writeFile = writeFile;
+const fsModules = {
+	createFile: fs.writeFileSync,
+	readFile: fs.readFileSync,
+	writeFile: fs.writeFileSync,
+	doesFileExist: fs.existsSync
+};
+exports.fsModules = fsModules;
