@@ -2,8 +2,10 @@ const valiadteEmpId = require("./common").isNum;
 const validateQuantity = require("./common").isNum;
 const validateBeverage = require("./common").isString;
 const validateDate = require("./common").isValidDate;
-const { addEmployeeTransaction } = require("../src/addEmployeeTransaction");
-const { getEmployeeTransaction } = require("../src/getEmployeeTransaction");
+const {
+	performQueryOperation,
+	performSaveOperation
+} = require("../src/performOperations.js");
 
 const OPERATION_ARGS_KEYS = ["beverage", "empId", "qty", "date"];
 
@@ -28,11 +30,12 @@ const QUERY_ARGS = {
 };
 
 const OPERATIONS = {
-	"--save": addEmployeeTransaction,
-	"--query": getEmployeeTransaction
+	"--save": performSaveOperation,
+	"--query": performQueryOperation
 };
 
 const HEADER = "Employee ID, Beverage, Quantity, Date\n";
+
 module.exports = {
 	SAVE_ARGS_VALIDATION_REF: SAVE_ARGS_VALIDATION_REF,
 	OPERATIONS: OPERATIONS,
